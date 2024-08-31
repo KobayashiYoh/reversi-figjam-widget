@@ -11,7 +11,7 @@ const { AutoLayout } = widget;
 export const Board = () => {
   const { board, isBlackTurn, isGameOver, handleTileClick } = useBoard();
 
-  const tileSize = 36;
+  const tileSize = 40;
   const boardSize = BOARD_SIZE * tileSize;
 
   const rows = [];
