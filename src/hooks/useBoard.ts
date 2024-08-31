@@ -1,0 +1,62 @@
+const { widget } = figma;
+const { useSyncedState } = widget;
+
+import {
+  initialReversiBoard,
+  showWinner,
+  findFlippableTilesInAllDirection,
+  isPass,
+} from "../utils/reversiLogics";
+import { TileStatus, TileStatusType } from "../constants/reversiConstants";
+
+export const useGameBoard = () => {
+  const [board, setBoard] = useSyncedState<TileStatusType[][]>(
+    "board",
+    initialReversiBoard
+  );
+  const [isBlackTurn, setBlackTurn] = useSyncedState("isBlackTurn", true);
+  const [isGameOver, setGameOver] = useSyncedState("isGameOver", false);
+
+  const currentTurnTile: TileStatusType = isBlackTurn
+    ? TileStatus.Black
+    : TileStatus.White;
+  const nextTurnTile: TileStatusType = !isBlackTurn
+    ? TileStatus.Black
+    : TileStatus.White;
+
+  const handleTileClick = (row: number, col: number) => {
+    if (isGameOver) return;
+
+    const selectedTile: TileStatusType = board[row][col];
+    if (selectedTile !== TileStatus.Empty) return;
+
+    const flippableTiles = findFlippableTilesInAllDirection(
+      board,
+      row,
+      col,
+      currentTurnTile
+    );
+    if (flippableTiles.length === 0) return;
+
+    const newBoard: TileStatusType[][] = board.map((r) => r.slice());
+    newBoard[row][col] = currentTurnTile;
+    flippableTiles.forEach(([x, y]) => {
+      newBoard[x][y] = currentTurnTile;
+    });
+    setBoard(newBoard);
+
+    const nextPlayerMustPass = isPass(newBoard, nextTurnTile);
+    const currentPlayerMustPass = isPass(newBoard, currentTurnTile);
+    const bothPlayersMustPass = nextPlayerMustPass && currentPlayerMustPass;
+    if (bothPlayersMustPass) {
+      setGameOver(true);
+      showWinner(board);
+    } else if (nextPlayerMustPass) {
+      setBlackTurn(isBlackTurn); // continue current turn
+    } else {
+      setBlackTurn(!isBlackTurn); // switch player
+    }
+  };
+
+  return { board, handleTileClick };
+};
