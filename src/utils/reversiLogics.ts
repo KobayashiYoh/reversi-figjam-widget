@@ -1,5 +1,7 @@
 import {
   BOARD_SIZE,
+  GameResult,
+  GameResultType,
   TileStatus,
   TileStatusType,
   directions,
@@ -108,11 +110,14 @@ const countTiles = (
   tileType: TileStatusType
 ): number => board.flat().filter((tile) => tile === tileType).length;
 
-export const showWinner = (board: TileStatusType[][]) => {
+export const judgeGameResult = (board: TileStatusType[][]): GameResultType => {
   const blackCount = countTiles(board, TileStatus.Black);
   const whiteCount = countTiles(board, TileStatus.White);
 
-  if (blackCount > whiteCount) console.log("Win Black");
-  if (whiteCount > blackCount) console.log("Win White");
-  if (blackCount === whiteCount) console.log("Draw");
+  if (blackCount === whiteCount) {
+    return GameResult.Draw;
+  } else if (blackCount > whiteCount) {
+    return GameResult.BlackWin;
+  }
+  return GameResult.WhiteWin;
 };

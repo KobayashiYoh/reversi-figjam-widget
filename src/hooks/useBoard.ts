@@ -3,11 +3,19 @@ const { useSyncedState } = widget;
 
 import {
   initialReversiBoard,
-  showWinner,
+  judgeGameResult,
   findFlippableTilesInAllDirection,
   isPass,
 } from "../utils/reversiLogics";
-import { TileStatus, TileStatusType } from "../constants/reversiConstants";
+import {
+  drawText,
+  GameResult,
+  GameResultType,
+  loserText,
+  TileStatus,
+  TileStatusType,
+  winnerText,
+} from "../constants/reversiConstants";
 
 export const useBoard = () => {
   const [board, setBoard] = useSyncedState<TileStatusType[][]>(
@@ -66,7 +74,17 @@ export const useBoard = () => {
     const bothPlayersMustPass = nextPlayerMustPass && currentPlayerMustPass;
     if (bothPlayersMustPass) {
       setGameOver(true);
-      showWinner(board);
+      const result: GameResultType = judgeGameResult(board);
+      if (result === GameResult.Draw) {
+        setBlackResultText(drawText);
+        setWhiteResultText(drawText);
+      } else if (result === GameResult.BlackWin) {
+        setBlackResultText(winnerText);
+        setWhiteResultText(loserText);
+      } else {
+        setBlackResultText(loserText);
+        setWhiteResultText(winnerText);
+      }
     } else if (nextPlayerMustPass) {
       setBlackTurn(isBlackTurn); // continue current turn
     } else {

@@ -8,6 +8,18 @@ export const TileStatus = {
 
 export type TileStatusType = keyof typeof TileStatus;
 
+export const GameResult = {
+  Draw: "Draw",
+  BlackWin: "BlackWin",
+  WhiteWin: "WhiteWin",
+} as const;
+
+export type GameResultType = keyof typeof GameResult;
+
+export const drawText = "Draw";
+export const winnerText = "Winner!";
+export const loserText = "Loser...";
+
 export const directions = [
   [-1, 0], // Up
   [1, 0], // Down
