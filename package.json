@@ -22,6 +22,12 @@
     "containsWidget": true,
     "id": "reversi",
     "name": "Reversi",
-    "main": "src/main.tsx"
+    "main": "src/main.tsx",
+    "documentAccess": "dynamic-page",
+    "networkAccess": {
+      "allowedDomains": [
+        "none"
+      ]
+    }
   }
 }
