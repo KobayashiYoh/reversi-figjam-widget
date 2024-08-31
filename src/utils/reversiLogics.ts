@@ -42,17 +42,17 @@ const findFlippableTilesInSingleDirection = (
   let x = startX + dx;
   let y = startY + dy;
 
-  const isContinuation =
-    isInBounds(x, y) && isOpponentPlayerTile(board, x, y, playerTile);
-  while (isContinuation) {
+  while (isInBounds(x, y) && isOpponentPlayerTile(board, x, y, playerTile)) {
     flippableTiles.push([x, y]);
     x += dx;
     y += dy;
   }
 
-  const flippable =
-    flippableTiles.length > 0 && isInBounds(x, y) && board[x][y] === playerTile;
-  if (flippable) {
+  if (
+    flippableTiles.length > 0 &&
+    isInBounds(x, y) &&
+    board[x][y] === playerTile
+  ) {
     return flippableTiles;
   }
   return [];
