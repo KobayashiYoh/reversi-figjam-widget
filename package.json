@@ -20,9 +20,8 @@
       "figjam"
     ],
     "containsWidget": true,
-    "id": "notepad",
-    "name": "Notepad",
-    "main": "src/main.tsx",
-    "ui": "src/ui.tsx"
+    "id": "reversi",
+    "name": "Reversi",
+    "main": "src/main.tsx"
   }
 }
