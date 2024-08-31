@@ -1,4 +1,4 @@
-# Notepad
+# Reversi
 
 ## Development guide
 
