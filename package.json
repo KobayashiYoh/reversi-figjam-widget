@@ -20,7 +20,7 @@
       "figjam"
     ],
     "containsWidget": true,
-    "id": "reversi",
+    "id": "1411644011353793846",
     "name": "Reversi",
     "main": "src/main.tsx",
     "documentAccess": "dynamic-page",
