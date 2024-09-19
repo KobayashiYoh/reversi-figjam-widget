@@ -1,4 +1,9 @@
-# Reversi
+# Reversi FigJam Widget
+This is FigJam Widget of Reversi as published on Figma Community.
+<img width="1440" alt="スクリーンショット 2024-09-19 21 31 35" src="https://github.com/user-attachments/assets/5198b234-c634-4011-9434-0ad3abcaa104">
+
+## URL
+[https://www.figma.com/community/widget/1410322967944300600](https://www.figma.com/community/widget/1411644011353793846)
 
 ## Development guide
 
